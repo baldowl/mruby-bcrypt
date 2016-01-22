@@ -6,8 +6,13 @@ compiler:
   - gcc
   - clang
 
+env:
+  - VERSION=1.1.0
+  - VERSION=1.2.0
+  - VERSION=master
+
 script:
   - export MRUBY_CONFIG="$TRAVIS_BUILD_DIR/.travis_build_config.rb"
-  - git clone --depth 1 git://github.com/mruby/mruby.git
+  - git clone --depth 1 --branch $VERSION git://github.com/mruby/mruby.git
   - cd mruby
   - ./minirake test
