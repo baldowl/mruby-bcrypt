@@ -1,7 +1,6 @@
 In no specific order:
 
 * docs
-* CommonCrypto for Apple's platform
 * portable, robust PRNG?
 * test `BCrypt::Engine.calibrate` (why is `Time` undefined when running
   tests?)

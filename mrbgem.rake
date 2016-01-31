@@ -9,5 +9,5 @@ MRuby::Gem::Specification.new 'mruby-bcrypt' do |spec|
 
   spec.add_dependency 'mruby-onig-regexp', :github => 'mattn/mruby-onig-regexp'
 
-  spec.linker.libraries << 'crypto'
+  spec.linker.libraries << 'crypto' unless RUBY_PLATFORM =~ /darwin/
 end

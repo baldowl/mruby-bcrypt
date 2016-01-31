@@ -6,13 +6,16 @@ It's essentially a port of [BCrypt](https://github.com/codahale/bcrypt-ruby),
 the popular Ruby gem; the API is not 100% the same, but if you don't pass it
 garbage you'll receive good, compatible results.
 
-Dependencies: OpenSSL and a regular expression engine (I chose
-`mruby-onig-regexp`).
+Dependencies:
+
+* a regular expression engine (I chose `mruby-onig-regexp`);
+* either OpenSSL or, if you're compiling for a not-too-old Apple platform,
+  Common Crypto (if you're compiling for an old Apple platform, tweak
+  `mrbgem.rake` to link `crypto` unconditionally).
 
 ## Installation
 
-- Ensure that you have OpenSSL installed and available.
-- Add the usual `conf.gem` line to `build_config.rb`
+Add the usual `conf.gem` line to `build_config.rb`:
 
 ```ruby
 MRuby::Build.new do |conf|
