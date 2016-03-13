@@ -8,6 +8,9 @@ MRuby::Gem::Specification.new 'mruby-bcrypt' do |spec|
     map{|f| f.relative_path_from(dir).pathmap("#{build_dir}/%X.o")}
 
   spec.add_dependency 'mruby-onig-regexp', :github => 'mattn/mruby-onig-regexp'
+  if build.respond_to?(:test_enabled?) && build.test_enabled?
+    spec.add_dependency 'mruby-time'
+  end
 
   spec.linker.libraries << 'crypto' unless RUBY_PLATFORM =~ /darwin/
 end

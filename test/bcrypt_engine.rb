@@ -128,3 +128,12 @@ assert 'BCrypt::Engine.generate_salt' do
     assert_equal BCrypt::Engine::DEFAULT_COST.to_s, salt.split('$')[2]
   end
 end
+
+if Object.const_defined?(:Time)
+  assert 'BCrypt::Engine.calibrate' do
+    assert_kind_of Integer, BCrypt::Engine.calibrate(0)
+
+    cost_range = BCrypt::Engine::MIN_COST..BCrypt::Engine::MAX_COST
+    assert_include(cost_range, BCrypt::Engine.calibrate(0))
+  end
+end
