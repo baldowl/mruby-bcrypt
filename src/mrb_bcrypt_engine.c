@@ -23,6 +23,10 @@
 #endif
 #include <string.h>
 
+/*
+ * call-seq:
+ *    BCrypt::Engine.__bc_random_bytes(int)    -> string
+ */
 static mrb_value bc_random_bytes(mrb_state *mrb, mrb_value self){
 	mrb_int len, buffer_size;
 	unsigned char *buf;
@@ -59,6 +63,10 @@ static mrb_value bc_random_bytes(mrb_state *mrb, mrb_value self){
 #include "crypt_blowfish/ow-crypt.h"
 #include "mruby/string.h"
 
+/*
+ * call-seq:
+ *    BCrypt::Engine.__bc_salt(prefix_string, cost, random_string)    -> string
+ */
 static mrb_value bc_salt(mrb_state *mrb, mrb_value self){
 	mrb_value prefix, input, str_salt;
 	mrb_int count;
@@ -79,6 +87,10 @@ static mrb_value bc_salt(mrb_state *mrb, mrb_value self){
 
 
 
+/*
+ * call-seq:
+ *    BCrypt::Engine.hash_secret(secret, salt)    -> hashed_string
+ */
 static mrb_value bc_crypt(mrb_state *mrb, mrb_value self){
 	mrb_value key, settings, hashed_key;
 	char *hashed;
