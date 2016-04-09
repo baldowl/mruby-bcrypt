@@ -1,8 +1,6 @@
 /*
 ** mrb_bcrypt.c - BCrypt module
 **
-** Copyright (c) Emanuele Vicentini 2015
-**
 ** See Copyright Notice in LICENSE
 */
 

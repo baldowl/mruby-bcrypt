@@ -1,8 +1,6 @@
 /*
 ** mrb_bcrypt_engine.c - BCrypt::Engine class
 **
-** Copyright (c) Emanuele Vicentini 2015
-**
 ** See Copyright Notice in LICENSE
 */
 

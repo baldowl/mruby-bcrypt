@@ -54,10 +54,12 @@ module BCrypt
     #
     # The optional <tt>:cost</tt> determines how computational expensive the
     # hash calculation is: higher cost results in harder to guess passwords if
-    # your stored hashes are stone.
+    # your stored hashes are stolen.
     #
     # The cost factor is logarithmic, so a cost of 15 is about twice as much
     # work as 14.
+    #
+    # BCrypt::Engine.cost is used if called without <tt>:cost</tt>.
     def self.create secret, options = {}
       cost = options[:cost] || BCrypt::Engine.cost
       Password.new(BCrypt::Engine.hash_secret(secret.to_s,

@@ -56,7 +56,9 @@ module BCrypt
     # Given an optional +cost+ factor, it generates a random salt string
     # (which includes algorithm's version and cost factor).
     #
-    # +DEFAULT_COST+ is used when called without an explicit +cost+ factor.
+    # BCrypt::Engine.cost is used when called without an explicit +cost+
+    # factor. +DEFAULT_COST+ is used when called with an invalid +cost+
+    # factor.
     def self.generate_salt(cost = self.cost)
       cost = valid_cost?(cost) ? cost.to_i : DEFAULT_COST
       __bc_salt '$2b$', cost, __bc_random_bytes(RANDOM_BYTES)
