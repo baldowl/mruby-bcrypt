@@ -9,6 +9,8 @@ MRuby::Gem::Specification.new 'mruby-bcrypt' do |spec|
 
   spec.add_dependency 'mruby-onig-regexp',
     :github => 'mattn/mruby-onig-regexp'
+  spec.add_dependency 'mruby-secure-compare',
+    :github => 'Asmod4n/mruby-secure-compare'
 
   spec.add_test_dependency 'mruby-time'
 

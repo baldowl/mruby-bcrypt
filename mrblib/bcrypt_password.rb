@@ -84,12 +84,7 @@ module BCrypt
     # Returns true if +secret+ is the original secret/password (i.e., it can
     # be used to recreate the hash).
     def ==(secret)
-      new_hash = BCrypt::Engine.hash_secret(secret, @salt)
-      return false unless self.class.valid_hash?(new_hash)
-      new_hash_bytes = new_hash.bytes
-      result = 0
-      @raw_hash.bytes.each {|byte| result |= byte ^ new_hash_bytes.shift}
-      result == 0
+      @raw_hash.securecmp(BCrypt::Engine.hash_secret(secret, @salt))
     end
 
     alias_method :is_password?, :==
