@@ -5,61 +5,11 @@
 */
 
 #include "mruby.h"
-
-#if defined __APPLE__ && ((defined __MAC_OS_X_VERSION_MIN_REQUIRED && __MAC_OS_X_VERSION_MIN_REQUIRED >= 101000) || (defined __IPHONE_OS_VERSION_MIN_REQUIRED && __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000))
-#define _MRUBY_BCRYPT_USES_COMMON_CRYPTO
-#endif
-
-#ifdef _MRUBY_BCRYPT_USES_COMMON_CRYPTO
-#include <CommonCrypto/CommonCryptoError.h>
-#include <CommonCrypto/CommonRandom.h>
-#include <sys/errno.h>
-#include <stdlib.h>
-#else
-#include <openssl/rand.h>
-#include <openssl/err.h>
-#endif
-#include <string.h>
-
-/*
- * call-seq:
- *    BCrypt::Engine.__bc_random_bytes(int)    -> string
- */
-static mrb_value bc_random_bytes(mrb_state *mrb, mrb_value self){
-	mrb_int len, buffer_size;
-	unsigned char *buf;
-	mrb_value rand_str;
-
-	mrb_get_args(mrb, "i", &len);
-	if (len < 0) mrb_raise(mrb, E_ARGUMENT_ERROR, "illegal string size");
-
-	buffer_size = len + 1;
-
-	buf = (unsigned char *)mrb_malloc(mrb, buffer_size);
-	memset(buf, 0, buffer_size);
-
-#ifdef _MRUBY_BCRYPT_USES_COMMON_CRYPTO
-	if (CCRandomGenerateBytes(buf, len) != kCCSuccess){
-		mrb_raise(mrb, E_RUNTIME_ERROR, "Unable to generate random numbers");
-	}
-#else
-	if (RAND_bytes(buf, len) != 1){
-		char error_message[120];
-		ERR_error_string(ERR_get_error(), error_message);
-		mrb_raise(mrb, E_RUNTIME_ERROR, error_message);
-	}
-#endif
-
-	rand_str = mrb_str_new(mrb, (const char *)buf, len);
-	mrb_free(mrb, buf);
-
-	return rand_str;
-}
-
-
-
 #include "crypt_blowfish/ow-crypt.h"
 #include "mruby/string.h"
+#include <string.h>
+#include <sys/errno.h>
+#include <stdlib.h>
 
 /*
  * call-seq:
@@ -116,7 +66,6 @@ void bcrypt_engine_init(mrb_state *mrb, struct RClass *module){
 
 	engine = mrb_define_class_under(mrb, module, "Engine", mrb->object_class);
 
-	mrb_define_class_method(mrb, engine, "__bc_random_bytes", bc_random_bytes, MRB_ARGS_REQ(1));
 	mrb_define_class_method(mrb, engine, "__bc_salt", bc_salt, MRB_ARGS_REQ(3));
 	mrb_define_class_method(mrb, engine, "hash_secret", bc_crypt, MRB_ARGS_REQ(2));
 }

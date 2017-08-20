@@ -11,8 +11,8 @@ MRuby::Gem::Specification.new 'mruby-bcrypt' do |spec|
     :github => 'mattn/mruby-onig-regexp'
   spec.add_dependency 'mruby-secure-compare',
     :github => 'Asmod4n/mruby-secure-compare'
+  spec.add_dependency 'mruby-sysrandom',
+    :github => 'Asmod4n/mruby-sysrandom'
 
   spec.add_test_dependency 'mruby-time'
-
-  spec.linker.libraries << 'crypto' unless RUBY_PLATFORM =~ /darwin/
 end

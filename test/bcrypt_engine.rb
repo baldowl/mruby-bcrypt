@@ -2,22 +2,10 @@
 ## BCrypt::Engine Test
 ##
 
-assert 'BCrypt::Engine.__bc_random_bytes' do
-  [0, 1, 2, 15].each do |requested_bytes|
-    random_bytes = BCrypt::Engine.__bc_random_bytes requested_bytes
-    assert_kind_of String, random_bytes
-    assert_equal requested_bytes, random_bytes.length
-  end
-
-  assert_raise(ArgumentError) { BCrypt::Engine.__bc_random_bytes }
-  assert_raise(ArgumentError) { BCrypt::Engine.__bc_random_bytes(-1) }
-  assert_raise(TypeError) { BCrypt::Engine.__bc_random_bytes 'hello' }
-end
-
 assert 'BCrypt::Engine.__bc_salt' do
   prefix = '$2b$'
   cost = BCrypt::Engine::MAX_COST
-  input = BCrypt::Engine.__bc_random_bytes BCrypt::Engine::RANDOM_BYTES
+  input = Sysrandom.random_bytes BCrypt::Engine::RANDOM_BYTES
 
   settings = BCrypt::Engine.__bc_salt prefix, cost, input
   assert_kind_of String, settings

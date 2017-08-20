@@ -61,7 +61,7 @@ module BCrypt
     # factor.
     def self.generate_salt(cost = self.cost)
       cost = valid_cost?(cost) ? cost.to_i : DEFAULT_COST
-      __bc_salt '$2b$', cost, __bc_random_bytes(RANDOM_BYTES)
+      __bc_salt '$2b$', cost, Sysrandom.random_bytes(RANDOM_BYTES)
     end
 
     ##

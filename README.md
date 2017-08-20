@@ -9,9 +9,7 @@ garbage you'll receive good, compatible results.
 Dependencies:
 
 * a regular expression engine (I chose `mruby-onig-regexp`);
-* either OpenSSL or, if you're compiling for a not-too-old Apple platform,
-  Common Crypto (if you're compiling for an old Apple platform, tweak
-  `mrbgem.rake` to link `crypto` unconditionally).
+* `/dev/urandom` (as last resource; see [mruby-sysrandom's doc](https://github.com/Asmod4n/mruby-sysrandom.git)).
 
 ## Installation
 
