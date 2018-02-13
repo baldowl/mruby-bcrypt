@@ -44,14 +44,17 @@ static mrb_value bc_crypt(mrb_state *mrb, mrb_value self){
 	char *hashed;
 
 	void *data = NULL;
-	mrb_int size = 0xDEADBEEF;
+	int size = 0xDEADBEEF;
 
 	mrb_get_args(mrb, "SS", &key, &settings);
 
 	hashed = crypt_ra(RSTRING_PTR(key), RSTRING_PTR(settings), &data,
 	    &size);
 
-	if (!hashed) mrb_raise(mrb, E_RUNTIME_ERROR, strerror(errno));
+	if (!hashed) {
+		free(data);
+		mrb_raise(mrb, E_RUNTIME_ERROR, strerror(errno));
+	}
 
  	hashed_key= mrb_str_new(mrb, hashed, size - 1);
 	free(data);
