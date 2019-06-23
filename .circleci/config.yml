@@ -21,6 +21,17 @@ jobs:
 
 workflows:
   version: 2
+  weekly:
+    triggers:
+      - schedule:
+          cron: "0 5 * * 6"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - test_against_mruby:
+          version: "master"
   test:
     jobs:
       - test_against_mruby:
@@ -33,3 +44,5 @@ workflows:
           version: "2.0.0"
       - test_against_mruby:
           version: "2.0.1"
+      - test_against_mruby:
+          version: "master"
