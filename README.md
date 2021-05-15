@@ -1,4 +1,4 @@
-# mruby-bcrypt [![Build Status](https://travis-ci.org/baldowl/mruby-bcrypt.svg?branch=master)](https://travis-ci.org/baldowl/mruby-bcrypt) [![CircleCI](https://circleci.com/gh/baldowl/mruby-bcrypt.svg?style=svg)](https://circleci.com/gh/baldowl/mruby-bcrypt) [![GitHub version](https://badge.fury.io/gh/baldowl%2Fmruby-bcrypt.svg)](https://badge.fury.io/gh/baldowl%2Fmruby-bcrypt)
+# mruby-bcrypt [![CircleCI](https://circleci.com/gh/baldowl/mruby-bcrypt.svg?style=svg)](https://circleci.com/gh/baldowl/mruby-bcrypt) [![GitHub version](https://badge.fury.io/gh/baldowl%2Fmruby-bcrypt.svg)](https://badge.fury.io/gh/baldowl%2Fmruby-bcrypt)
 
 OpenBSD-style Blowfish-based password hashing.
 
