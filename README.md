@@ -8,7 +8,7 @@ garbage you'll receive good, compatible results.
 
 Dependencies:
 
-* a regular expression engine (I chose `mruby-onig-regexp`);
+* a regular expression engine (I chose `mruby-regexp-pcre`);
 * `/dev/urandom` (as last resource; see [mruby-sysrandom's doc](https://github.com/Asmod4n/mruby-sysrandom.git)).
 
 ## Installation
