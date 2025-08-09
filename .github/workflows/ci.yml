@@ -21,7 +21,10 @@ jobs:
           - "3.3.0"
           - "3.4.0"
           - "master"
-    name: mruby ${{ matrix.mruby_version }}
+        regexp_lib:
+          - "pcre"
+          - "onig"
+    name: mruby ${{ matrix.mruby_version }} - ${{ matrix.regexp_lib }}
     runs-on: ubuntu-latest
     continue-on-error: ${{ matrix.mruby_version == 'master' }}
     steps:
@@ -36,6 +39,7 @@ jobs:
         env:
           CC: gcc
           MRUBY_CONFIG: ${{ github.workspace }}/.ci_build_config.rb
+          REGEXP_LIB: ${{ matrix.regexp_lib }}
         run: |
           cd mruby
           rake test

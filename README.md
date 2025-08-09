@@ -8,18 +8,27 @@ garbage you'll receive good, compatible results.
 
 Dependencies:
 
-* a regular expression engine (I chose `mruby-onig-regexp`);
+* a regular expression engine (tests are run with `mruby-onig-regexp` and
+  `mruby-regexp-pcre`);
 * `/dev/urandom` (as last resource; see [mruby-sysrandom's doc](https://github.com/Asmod4n/mruby-sysrandom.git)).
 
 ## Installation
 
-Add the usual `conf.gem` line to `build_config.rb`:
+Add the usual `conf.gem` block to `build_config.rb` (you **MUST** specify
+the regular expression engine):
 
 ```ruby
 MRuby::Build.new do |conf|
   # ...
 
-  conf.gem :github => 'baldowl/mruby-bcrypt'
+  conf.gem :github => 'baldowl/mruby-bcrypt' do |c|
+    # this 
+    c.add_dependency 'mruby-regexp-pcre',
+      :github => 'iij/mruby-regexp-pcre'
+    # or this
+    # c.add_dependency 'mruby-onig-regexp',
+    #   :github => 'mattn/mruby-onig-regexp'
+  end
 end
 ```
 
