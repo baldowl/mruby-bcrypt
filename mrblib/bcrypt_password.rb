@@ -42,7 +42,7 @@ module BCrypt
     #
     # Returns true if +raw_hash+ is a valid Blowfish hash.
     def self.valid_hash? raw_hash
-      !!(raw_hash =~ /^\$[0-9a-z]{2}\$[0-9]{2}\$[A-Za-z0-9\.\/]{53}$/)
+      !!(raw_hash =~ /\A\$[0-9a-z]{2}\$[0-9]{2}\$[A-Za-z0-9\.\/]{53}\z/)
     end
 
     ##
