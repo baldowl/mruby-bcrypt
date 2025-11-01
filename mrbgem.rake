@@ -12,7 +12,8 @@ MRuby::Gem::Specification.new 'mruby-bcrypt' do |spec|
   spec.add_dependency 'mruby-secure-compare',
     :github => 'Asmod4n/mruby-secure-compare'
   spec.add_dependency 'mruby-sysrandom',
-    :github => 'Asmod4n/mruby-sysrandom'
+    :github => 'Asmod4n/mruby-sysrandom',
+    :checksum_hash => '75347e898686c8c044b0fa8a76f42ad25daee45c'
 
   spec.add_test_dependency 'mruby-time'
 end
