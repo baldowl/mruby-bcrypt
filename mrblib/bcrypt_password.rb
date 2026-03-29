@@ -1,5 +1,5 @@
 module BCrypt
-  # A simple class which simplify password management.
+  # A simple class which simplifies password management.
   #
   #    # hash a user's password
   #    @password = BCrypt::Password.create("clever password")
@@ -94,7 +94,7 @@ module BCrypt
 
     ##
     # call-seq:
-    #    BCrypt::Password.split_hash(string)    -> [version, cost, salt, hash]
+    #    split_hash(string)    -> [version, cost, salt, hash]
     #
     # Splits +raw_hash+ into its basic components (algorithm's version, cost
     # factor, salt and hash).
