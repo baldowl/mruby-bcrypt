@@ -45,7 +45,7 @@ static mrb_value bc_crypt(mrb_state *mrb, mrb_value self){
 	char *hashed;
 
 	void *data = NULL;
-	int size = 0xDEADBEEF;
+	int size = 0;
 
 	mrb_get_args(mrb, "SS", &key, &settings);
 
