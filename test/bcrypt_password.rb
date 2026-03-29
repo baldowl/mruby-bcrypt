@@ -11,16 +11,24 @@ cost = 4
 settings = '$2b$04$ia18AcnE/QN7sWTKb3tYlO'
 checksum = '72JG6sdXl5uxnOdK2SEyilpQf7Hugk.'
 
-invalid_hash = 'clearly invalid'
+invalid_hashes = [
+  'clearly invalid',
+  # wrong version, so it must be rejected
+  '$2c$04$ia18AcnE/QN7sWTKb3tYlO72JG6sdXl5uxnOdK2SEyilpQf7Hugk.'
+]
 
 assert 'BCrypt::Password.valid_hash?' do
   assert_true BCrypt::Password.valid_hash?(valid_hash)
-  assert_false BCrypt::Password.valid_hash?(invalid_hash)
+  invalid_hashes.each do |invalid_hash|
+    assert_false BCrypt::Password.valid_hash?(invalid_hash)
+  end
 end
 
 assert 'BCrypt::Password.new' do
   assert_kind_of BCrypt::Password, BCrypt::Password.new(valid_hash)
-  assert_raise(ArgumentError) { BCrypt::Password.new invalid_hash }
+  invalid_hashes.each do |invalid_hash|
+    assert_raise(ArgumentError) { BCrypt::Password.new invalid_hash }
+  end
 
   password_object = BCrypt::Password.new valid_hash
 
