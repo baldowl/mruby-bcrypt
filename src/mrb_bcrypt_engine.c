@@ -28,6 +28,7 @@ static mrb_value bc_salt(mrb_state *mrb, mrb_value self){
 	if (!salt) mrb_raise(mrb, E_RUNTIME_ERROR, strerror(errno));
 
 	str_salt = mrb_str_new_cstr(mrb, salt);
+	memset(salt, 0, strlen(salt));
 	free(salt);
 
 	return str_salt;
@@ -52,11 +53,13 @@ static mrb_value bc_crypt(mrb_state *mrb, mrb_value self){
 	    &size);
 
 	if (!hashed) {
+		memset(data, 0, size);
 		free(data);
 		mrb_raise(mrb, E_RUNTIME_ERROR, strerror(errno));
 	}
 
  	hashed_key= mrb_str_new(mrb, hashed, size - 1);
+	memset(data, 0, size);
 	free(data);
 
 	return hashed_key;
