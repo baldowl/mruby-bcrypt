@@ -10,6 +10,8 @@ MRuby::Build.new do |conf|
     when 'onig'
       c.add_dependency 'mruby-onig-regexp',
         :github => 'mattn/mruby-onig-regexp'
+    when 'native'
+      c.add_dependency 'mruby-regexp'
     end
   end
   conf.enable_test

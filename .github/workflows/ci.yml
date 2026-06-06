@@ -28,6 +28,9 @@ jobs:
         exclude:
           - mruby_version: "4.0.0"
             regexp_lib: "pcre"
+        include:
+          - mruby_version: "master"
+            regexp_lib: "native"
     name: mruby ${{ matrix.mruby_version }} - ${{ matrix.regexp_lib }}
     runs-on: ubuntu-latest
     continue-on-error: ${{ matrix.mruby_version == 'master' || matrix.regexp_lib == 'onig' }}

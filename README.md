@@ -28,6 +28,8 @@ MRuby::Build.new do |conf|
     # or this
     # c.add_dependency 'mruby-onig-regexp',
     #   :github => 'mattn/mruby-onig-regexp'
+    # or this
+    # c.add_dependency 'mruby-regexp'
   end
 end
 ```
